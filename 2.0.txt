@@ -1,0 +1,130 @@
+#include <iostream>
+#include <vector>
+#include <fstream>
+#include <string>
+struct Student {
+    std::string firstName;
+    std::string surname;
+    std::string gender;
+    int age;
+    std::string bbitGroup;
+    std::string sport;
+     bool isParticipatingInSport{};
+    std::string club;
+};
+std::vector<Student> students;
+void addStudent() {
+    Student newStudent;
+    std::cout << "Enter First Name: ";
+    std::cin >> newStudent.firstName;
+    std::cout << "Enter Surname: ";
+    std::cin >> newStudent.surname;
+    std::cout << "Enter Gender: ";
+    std::cin >> newStudent.gender;
+    std::cout << "Enter Age: ";
+    std::cin >> newStudent.age;
+    std::cout << "Enter BBIT Group: ";
+    std::cin >> newStudent.bbitGroup;
+    std::cout<<"enter sport:";
+    std::cin>>newStudent.sport;
+    std::cout<<"enter club:";
+    std::cin>>newStudent.club;
+    students.push_back(newStudent);
+}
+void viewStudents() {
+    // Display all students
+    for (const auto& student : students) {
+        std::cout << "Name: " << student.firstName << " " << student.surname << std::endl;
+        std::cout << "Gender: " << student.gender << std::endl;
+        std::cout << "Age: " << student.age << std::endl;
+        std::cout << "BBIT Group: " << student.bbitGroup << std::endl;
+        std::cout<<"Sport:"<<student.sport<<std::endl;
+        std::cout<<"Club:"<<student.club<<std::endl;
+        std::cout << "-------------------------" << std::endl;
+    }
+}
+
+void saveToFile() {
+    std::ofstream file("students.csv");
+    file << "First Name, Surname, Gender, Age, BBIT Group,Sport" << std::endl;
+    for (const auto& student : students) {
+        file << student.firstName << "," << student.surname << "," << student.gender << "," << student.age << "," << student.bbitGroup<<student.sport<<student.club<< std::endl;
+    }
+    file.close();
+}
+bool checkClubGenderRatio(const std::vector<Student>& students, const std::string& club) {
+    int maleCount = 0;
+    int femaleCount = 0;
+    for (const auto& student : students) {
+        if (student.club.find(club) != std::string::npos) {
+            if (student.gender == "Male") {
+                maleCount++;
+            } else if (student.gender == "Female") {
+                femaleCount++;
+            }
+        }
+    }
+    if (maleCount * 100 / femaleCount >= 50) { 
+        std::cout << "maximum capacity reached";
+    }else{std::cout<<"proceed";}
+    return true;
+}
+bool checkSportGenderRatio(const std::vector<Student>& students, const std::string& sport)
+{
+    int total = 0, maleCount = 0, femaleCount = 0;
+    for (const auto &student : students){
+        if (student.isParticipatingInSport) {
+            total++;
+            if (student.gender == "Male") {
+                maleCount++;
+                } else if (student.gender == "Female") {
+                femaleCount++;
+            }
+        }
+    }
+    return (maleCount <= total * 0.75) && (femaleCount <= total * 0.75);
+}
+int main() {
+    int choice;
+    do {
+        std::cout << "Menu:\n1. Add Student\n2. View Students\n3. Save to File\n4. checkClubGEnderRatio\n5.checkSportGenderRatio\n6Exit\n.Enter your choice: ";
+        std::cin >> choice;
+
+        switch (choice) {
+            case 1:
+                addStudent();
+                break;
+            case 2:
+                viewStudents();
+                break;
+            case 3:
+                saveToFile();
+                break;
+            case 4:
+                {
+                     std::string clubName;
+                     std::cout << "Enter the club name: ";
+                     std::cin >> clubName; 
+                     checkClubGenderRatio(students, clubName);
+                     break;
+                 }
+            break;
+            case 5:
+                {
+                    std::string sportName;
+                    std::cout<<"Enter the sport name:";
+                    std::cin>>sportName;
+                    checkSportGenderRatio(students, sportName);
+                    break;
+                }
+            case 6:
+                std::cout << "Exiting program. Goodbye!\n";
+                break;
+            default:
+                std::cout << "Invalid choice. Please try again." << std::endl;
+        }
+    } while (choice != 6);
+
+    return 0;
+}
+
