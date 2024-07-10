@@ -8,7 +8,7 @@ struct Student {
     std::string surname;
     std::string gender;
     int age;
-    std::string bbitGroup;
+    std::string bbitgroup;
     std::string sport;
      bool isParticipatingInSport{};
     std::string club;
