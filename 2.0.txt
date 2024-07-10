@@ -1,7 +1,8 @@
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <string>
+
+#include<iostream>
+#include<vector>
+#include<fstream>
+#include<string>
 struct Student {
     std::string firstName;
     std::string surname;
