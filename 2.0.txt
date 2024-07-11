@@ -15,7 +15,7 @@ struct Student {
 };
 std::vector<Student> students;
 void addStudent() {
-    Student newStudent;
+    Student newstudent;
     std::cout << "Enter First Name: ";
     std::cin >> newStudent.firstName;
     std::cout << "Enter Surname: ";
