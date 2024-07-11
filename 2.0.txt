@@ -15,7 +15,7 @@ struct Student {
 };
 std::vector<Student> students;
 void addStudent() {
-    Student newstudent;
+    Student newStudent;
     std::cout << "Enter First Name: ";
     std::cin >> newStudent.firstName;
     std::cout << "Enter Surname: ";
@@ -25,7 +25,7 @@ void addStudent() {
     std::cout << "Enter Age: ";
     std::cin >> newStudent.age;
     std::cout << "Enter BBIT Group: ";
-    std::cin >> newStudent.bbitGroup;
+    std::cin >> newStudent.bbitgroup;
     std::cout<<"enter sport:";
     std::cin>>newStudent.sport;
     std::cout<<"enter club:";
@@ -38,7 +38,7 @@ void viewStudents() {
         std::cout << "Name: " << student.firstName << " " << student.surname << std::endl;
         std::cout << "Gender: " << student.gender << std::endl;
         std::cout << "Age: " << student.age << std::endl;
-        std::cout << "BBIT Group: " << student.bbitGroup << std::endl;
+        std::cout << "BBIT Group: " << student.bbitgroup << std::endl;
         std::cout<<"Sport:"<<student.sport<<std::endl;
         std::cout<<"Club:"<<student.club<<std::endl;
         std::cout << "-------------------------" << std::endl;
@@ -49,7 +49,7 @@ void saveToFile() {
     std::ofstream file("students.csv");
     file << "First Name, Surname, Gender, Age, BBIT Group,Sport" << std::endl;
     for (const auto& student : students) {
-        file << student.firstName << "," << student.surname << "," << student.gender << "," << student.age << "," << student.bbitGroup<<student.sport<<student.club<< std::endl;
+        file << student.firstName << "," << student.surname << "," << student.gender << "," << student.age << "," << student.bbitgroup<<student.sport<<student.club<< std::endl;
     }
     file.close();
 }
